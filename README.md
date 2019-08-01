@@ -15,8 +15,15 @@ $ composer require zacksleo/laravel-notification-wechat -vvv
 
 ```php
 
-    use Zacksleo\LaravelNotificationWechat\OfficialAccountChannel;
-    use Zacksleo\LaravelNotificationWechat\Messages\OfficialAccountTemplateMessage;
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Zacksleo\LaravelNotificationWechat\OfficialAccountChannel;
+use Zacksleo\LaravelNotificationWechat\Messages\OfficialAccountTemplateMessage;
+
+class OrderPaidSuccess extends Notification implements ShouldQueue
+{
+    use Queueable;
 
     public function via($notifiable)
     {
@@ -37,13 +44,22 @@ $ composer require zacksleo/laravel-notification-wechat -vvv
             'keyword2' => '关键词2',
         ]);
     }
+}
 ```
 
 ### 小程序模板消息
 
 ```php
-    use Zacksleo\LaravelNotificationWechat\MiniProgramChannel;
-    use Zacksleo\LaravelNotificationWechat\Messages\MiniProgramTemplateMessage;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Zacksleo\LaravelNotificationWechat\MiniProgramChannel;
+use Zacksleo\LaravelNotificationWechat\Messages\MiniProgramTemplateMessage;
+
+class OrderPaidSuccess extends Notification implements ShouldQueue
+{
+    use Queueable;
 
     public function via($notifiable)
     {
@@ -69,6 +85,7 @@ $ composer require zacksleo/laravel-notification-wechat -vvv
             'keyword2' => '关键词2',
         ]);
     }
+}
 ```
 
 ## Contributing
