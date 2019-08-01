@@ -11,16 +11,32 @@ $ composer require zacksleo/laravel-notification-wechat -vvv
 
 ## Usage
 
+### 创建通知类
+
+```bash
+    php artisan make:notification InvoicePaid
+```
+
+```php
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Zacksleo\LaravelNotificationWechat\MiniProgramChannel;
+use Zacksleo\LaravelNotificationWechat\OfficialAccountChannel;
+use Zacksleo\LaravelNotificationWechat\Messages\MiniProgramTemplateMessage;
+use Zacksleo\LaravelNotificationWechat\Messages\OfficialAccountTemplateMessage;
+
+class InvoicePaid extends Notification implements ShouldQueue
+{
+    use Queueable;
+
+    // ...
+}
+```
+
 ### 公众号模板消息
 
 ```php
-
-use Illuminate\Notifications\Notification;
-use Zacksleo\LaravelNotificationWechat\OfficialAccountChannel;
-use Zacksleo\LaravelNotificationWechat\Messages\OfficialAccountTemplateMessage;
-
-class OrderPaidSuccess extends Notification
-{
     public function via($notifiable)
     {
         return [OfficialAccountChannel::class];
@@ -38,20 +54,11 @@ class OrderPaidSuccess extends Notification
             'keyword2' => '关键词2',
         ]);
     }
-}
 ```
 
 ### 小程序模板消息
 
 ```php
-
-use Illuminate\Notifications\Notification;
-use Zacksleo\LaravelNotificationWechat\MiniProgramChannel;
-use Zacksleo\LaravelNotificationWechat\Messages\MiniProgramTemplateMessage;
-
-class OrderPaidSuccess extends Notification implements ShouldQueue
-{
-
     public function via($notifiable)
     {
         return [MiniProgramChannel::class];
@@ -69,7 +76,6 @@ class OrderPaidSuccess extends Notification implements ShouldQueue
             'keyword2' => '关键词2',
         ]);
     }
-}
 ```
 
 ## Contributing
