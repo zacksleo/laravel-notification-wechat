@@ -1,0 +1,19 @@
+{
+    "name": "zacksleo\/laravel-notification-wechat",
+    "description": "Package description here.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zacksleo",
+            "email": "zacksleo@gmail.com"
+        }
+    ],
+    "require": {
+        "overtrue/laravel-wechat": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zacksleo\\LaravelNotificationWechat\\": "src"
+        }
+    }
+}
