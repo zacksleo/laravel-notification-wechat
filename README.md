@@ -11,7 +11,65 @@ $ composer require zacksleo/laravel-notification-wechat -vvv
 
 ## Usage
 
-TODO
+### 公众号模板消息
+
+```php
+
+    use Zacksleo\LaravelNotificationWechat\OfficialAccountChannel;
+    use Zacksleo\LaravelNotificationWechat\Messages\OfficialAccountTemplateMessage;
+
+    public function via($notifiable)
+    {
+        return [OfficialAccountChannel::class];
+    }
+
+    public function toWechatOfficialAccount($notifiable): OfficialAccountTemplateMessage
+    {
+        $order = $this->order;
+
+        return (new OfficialAccountTemplateMessage)
+        ->to('接收用户的 openid')
+        ->template('模板 ID')
+        ->url('网页地址，如 https://demo.com')
+        ->miniprogram('小程序app_id', '小程序页面路径')
+        ->data([
+            'keyword1' => '关键词1',
+            'keyword2' => '关键词2',
+        ]);
+    }
+```
+
+### 小程序模板消息
+
+```php
+    use Zacksleo\LaravelNotificationWechat\MiniProgramChannel;
+    use Zacksleo\LaravelNotificationWechat\Messages\MiniProgramTemplateMessage;
+
+    public function via($notifiable)
+    {
+        return [MiniProgramChannel::class];
+    }
+
+    public function toWechatMiniProgram($notifiable): MiniProgramTemplateMessage
+    {
+        $order = $this->order;
+        $path = 'pages/trip/order/pay/index?id='.$order->id;
+
+        $model = $notifiable->templateMessageTickets()->active()->catalog(ClientCatalog::WECHAT_MINI_PROGRAM)->first();
+        $model->available_times--;
+        $model->save();
+
+        return (new MiniProgramTemplateMessage)
+        ->to('接收用户的 openid')
+        ->template('模板 ID')
+        ->formId('formId 或者 prepay_id')
+        ->page('小程序页面路径')
+        ->data([
+            'keyword1' => '关键词1',
+            'keyword2' => '关键词2',
+        ]);
+    }
+```
 
 ## Contributing
 
