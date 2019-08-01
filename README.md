@@ -14,7 +14,7 @@ $ composer require zacksleo/laravel-notification-wechat -vvv
 ### 创建通知类
 
 ```bash
-    php artisan make:notification InvoicePaid
+$ php artisan make:notification InvoicePaid
 ```
 
 ```php
