@@ -32,8 +32,6 @@ class OrderPaidSuccess extends Notification implements ShouldQueue
 
     public function toWechatOfficialAccount($notifiable): OfficialAccountTemplateMessage
     {
-        $order = $this->order;
-
         return (new OfficialAccountTemplateMessage)
         ->to('接收用户的 openid')
         ->template('模板 ID')
@@ -68,13 +66,6 @@ class OrderPaidSuccess extends Notification implements ShouldQueue
 
     public function toWechatMiniProgram($notifiable): MiniProgramTemplateMessage
     {
-        $order = $this->order;
-        $path = 'pages/trip/order/pay/index?id='.$order->id;
-
-        $model = $notifiable->templateMessageTickets()->active()->catalog(ClientCatalog::WECHAT_MINI_PROGRAM)->first();
-        $model->available_times--;
-        $model->save();
-
         return (new MiniProgramTemplateMessage)
         ->to('接收用户的 openid')
         ->template('模板 ID')
