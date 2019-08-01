@@ -3,7 +3,7 @@
 namespace Zacksleo\LaravelNotificationWechat;
 
 use EasyWeChat\MiniProgram\Application;
-use Zacksleo\LaravelNotificationWechat\Concerns\CanSendToMiniProgram;
+use Illuminate\Notifications\Notification;
 
 /**
  * 小程序消息发送通道
@@ -41,11 +41,11 @@ class MiniProgramChannel
      * @author zacksleo <zacksleo@gmail.com>
      *
      * @param mixed        $notifiable
-     * @param Zacksleo\LaravelNotificationWechat\Concerns\CanSendToMiniProgram $notification
+     * @param \Illuminate\Notifications\Notification $notification
      *
      * @return array
      */
-    public function send($notifiable, CanSendToMiniProgram $notification)
+    public function send($notifiable, Notification $notification)
     {
         $message = $notification->toWechatMiniProgram($notifiable);
         $data = $message->getPayload();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zacksleo\LaravelNotificationWechat;
+namespace Zacksleo\LaravelNotificationWechat\Messages;
 
 class MiniProgramTemplateMessage
 {

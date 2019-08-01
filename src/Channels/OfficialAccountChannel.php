@@ -4,6 +4,7 @@ namespace Zacksleo\LaravelNotificationWechat;
 
 use EasyWeChat\OfficialAccount\Application;
 use Zacksleo\LaravelNotificationWechat\Concerns\CanSendToOfficialAccount;
+use Illuminate\Notifications\Notification;
 
 class OfficialAccountChannel
 {
@@ -36,11 +37,11 @@ class OfficialAccountChannel
      * @author zacksleo <zacksleo@gmail.com>
      *
      * @param mixed        $notifiable
-     * @param Zacksleo\LaravelNotificationWechat\Concerns\CanSendToOfficialAccount $notification
+     * @param \Illuminate\Notifications\Notification $notification
      *
      * @return array
      */
-    public function send($notifiable, CanSendToOfficialAccount $notification)
+    public function send($notifiable, Notification $notification)
     {
         $message = $notification->toWechatOfficialAccount($notifiable);
         $data = $message->getPayload();

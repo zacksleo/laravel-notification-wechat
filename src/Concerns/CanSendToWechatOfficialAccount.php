@@ -6,5 +6,5 @@ use Zacksleo\LaravelNotificationWechat\Messages\OfficialAccountTemplateMessage;
 
 interface CanSendToOfficialAccount
 {
-    public function toWechatOfficialAccount() : OfficialAccountTemplateMessage;
+    public function toWechatOfficialAccount($notifiable) : OfficialAccountTemplateMessage;
 }

@@ -6,5 +6,5 @@ use Zacksleo\LaravelNotificationWechat\Messages\MiniProgramTemplateMessage;
 
 interface CanSendToWechatMiniProgram
 {
-    public function toWechatMiniProgram() : MiniProgramTemplateMessage;
+    public function toWechatMiniProgram($notifiable) : MiniProgramTemplateMessage;
 }
