@@ -15,16 +15,12 @@ $ composer require zacksleo/laravel-notification-wechat -vvv
 
 ```php
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Zacksleo\LaravelNotificationWechat\OfficialAccountChannel;
 use Zacksleo\LaravelNotificationWechat\Messages\OfficialAccountTemplateMessage;
 
-class OrderPaidSuccess extends Notification implements ShouldQueue
+class OrderPaidSuccess extends Notification
 {
-    use Queueable;
-
     public function via($notifiable)
     {
         return [OfficialAccountChannel::class];
@@ -49,15 +45,12 @@ class OrderPaidSuccess extends Notification implements ShouldQueue
 
 ```php
 
-use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Zacksleo\LaravelNotificationWechat\MiniProgramChannel;
 use Zacksleo\LaravelNotificationWechat\Messages\MiniProgramTemplateMessage;
 
 class OrderPaidSuccess extends Notification implements ShouldQueue
 {
-    use Queueable;
 
     public function via($notifiable)
     {
